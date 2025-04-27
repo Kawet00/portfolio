@@ -1,4 +1,4 @@
-import { createConfetti } from '@/lib/easterEggs';
+import { createConfetti } from '../../lib/easterEggs.js';
 
 export default function EasterEggWindow() {
   const handleConfettiClick = () => {
