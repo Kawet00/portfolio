@@ -2,12 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { type Profile } from "@shared/schema";
 
 export default function AboutWindow() {
-  const {
-    data: profile,
-    isLoading,
-    error,
-  } = useQuery<Profile>({
-    queryKey: ["/api/profile"],
+  const { data: profile, isLoading, error } = useQuery<Profile, Error>({
+    queryKey: ["profile"],
+    queryFn: async () => {
+      const res = await fetch("/api/profile");
+      if (!res.ok) throw new Error("Échec du chargement du profil");
+      return (await res.json()) as Profile;
+    },
   });
 
   if (isLoading) {
