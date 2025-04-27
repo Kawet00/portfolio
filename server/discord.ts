@@ -1,58 +1,51 @@
-
-import { Client, IntentsBitField, TextChannel } from 'discord.js';
-
-const client = new Client({
-  intents: [
-    IntentsBitField.Flags.Guilds,
-    IntentsBitField.Flags.DirectMessages
-  ]
-});
-
-let isReady = false;
-
-client.once('ready', () => {
-  console.log('Discord bot is ready!');
-  isReady = true;
-});
-
 export async function sendContactNotification(data: {
   name: string;
   email: string;
   subject: string;
   message: string;
 }) {
-  if (!isReady || !process.env.DISCORD_USER_ID) return;
+  // URL du workflow Pipedream OAuth
+  const pipedreamUrl = process.env.PIPEDREAM_WEBHOOK_URL;
+  
+  if (!pipedreamUrl) {
+    console.log("Contact form submitted but notification skipped - Webhook URL missing");
+    return;
+  }
+  
+  // Format standard Discord pour les OAuth webhooks
+  const payload = {
+    // Message texte simple (hors embeds)
+    content: "📬 Nouveau message du formulaire de contact!",
+    
+    // Embeds au format standard Discord (pas embedsData)
+    embeds: [
+      {
+        title: `Sujet: ${data.subject}`,
+        color: 0x5865F2, // Bleu Discord
+        fields: [
+          { name: "Nom", value: data.name, inline: true },
+          { name: "Email", value: data.email, inline: true },
+          { name: "Message", value: data.message }
+        ],
+        footer: { text: "Envoyé depuis le formulaire de contact du portfolio" },
+        timestamp: new Date().toISOString()
+      }
+    ]
+  };
   
   try {
-    const user = await client.users.fetch(process.env.DISCORD_USER_ID);
-    await user.send({
-      embeds: [{
-        title: '📬 New Contact Form Submission',
-        fields: [
-          { name: 'Name', value: data.name },
-          { name: 'Email', value: data.email },
-          { name: 'Subject', value: data.subject },
-          { name: 'Message', value: data.message }
-        ],
-        color: 0x0099ff,
-        timestamp: new Date().toISOString()
-      }]
+    const response = await fetch(pipedreamUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     });
-  } catch (error) {
-    console.error('Failed to send DM:', error);
-  }
-}
 
-// Connect bot if token is available
-if (process.env.DISCORD_BOT_TOKEN) {
-  console.log('Tentative de connexion du bot Discord...');
-  client.login(process.env.DISCORD_BOT_TOKEN)
-    .then(() => {
-      console.log('Bot Discord connecté avec succès!');
-    })
-    .catch((error) => {
-      console.error('Erreur de connexion du bot Discord:', error);
-    });
-} else {
-  console.warn('DISCORD_BOT_TOKEN non défini - le bot Discord ne sera pas connecté');
+    if (!response.ok) {
+      throw new Error(`Response ${response.status}: ${response.statusText}`);
+    }
+    
+    console.log("Contact form data sent to Pipedream successfully");
+  } catch (error) {
+    console.error('Failed to send notification:', error);
+  }
 }
