@@ -14,23 +14,10 @@ export async function sendContactNotification(data: {
   
   // Format standard Discord pour les OAuth webhooks
   const payload = {
-    // Message texte simple (hors embeds)
-    content: "📬 Nouveau message du formulaire de contact!",
-    
-    // Embeds au format standard Discord (pas embedsData)
-    embeds: [
-      {
-        title: `Sujet: ${data.subject}`,
-        color: 0x5865F2, // Bleu Discord
-        fields: [
-          { name: "Nom", value: data.name, inline: true },
-          { name: "Email", value: data.email, inline: true },
-          { name: "Message", value: data.message }
-        ],
-        footer: { text: "Envoyé depuis le formulaire de contact du portfolio" },
-        timestamp: new Date().toISOString()
-      }
-    ]
+    "sujet": data.subject,
+    "name": data.name,
+    "email": data.email,
+    "message": data.message
   };
   
   try {
