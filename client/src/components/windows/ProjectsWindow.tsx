@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { type Project } from '@shared/schema';
+import { type Project } from "../../../shared/schema.js";
 
 type ProjectCategory = 'All' | 'Web' | 'Mobile' | 'Other';
 
