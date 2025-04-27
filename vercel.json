@@ -1,9 +1,6 @@
 {
   "version": 2,
-  "installCommand": "npm install",
-  "env": {
-    "npm_config_optional": "false"
-  },
+  "installCommand": "npm ci --no-optional",
   "builds": [
     {
       "src": "package.json",
