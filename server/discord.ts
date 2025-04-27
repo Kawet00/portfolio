@@ -23,7 +23,7 @@ export async function sendContactNotification(data: {
   try {
     const response = await fetch(pipedreamUrl, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'User-Agent': 'pipedream/1' ,'Content-Type': 'application/json', "Authorization": `Bearer ${process.env.PIPEDREAM_TOKEN}` },
       body: JSON.stringify(payload)
     });
 
