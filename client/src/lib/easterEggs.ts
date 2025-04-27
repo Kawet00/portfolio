@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { useWindowStore } from './window';
+import { useWindowStore } from './window.ts';
 
 type KonamiCodeStep = 'ArrowUp' | 'ArrowDown' | 'ArrowLeft' | 'ArrowRight' | 'a' | 'b';
 
