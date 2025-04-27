@@ -1,6 +1,9 @@
 {
   "version": 2,
-  "installCommand": "npm ci --no-optional",
+  "installCommand": "npm install",
+  "env": {
+    "npm_config_optional": "false"
+  },
   "builds": [
     {
       "src": "package.json",
@@ -13,13 +16,7 @@
     }
   ],
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server/index.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/dist/public/$1"
-    }
+    { "src": "/api/(.*)", "dest": "/server/index.ts" },
+    { "src": "/(.*)",     "dest": "/dist/public/$1" }
   ]
 }
