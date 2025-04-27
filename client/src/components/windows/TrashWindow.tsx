@@ -1,5 +1,5 @@
-import { useWindowStore } from '@/lib/window';
-import { useEasterEggStore } from '@/lib/easterEggs';
+import { useWindowStore } from '../../lib/window.js';
+import { useEasterEggStore } from '../../lib/easterEggs.js';
 
 export default function TrashWindow() {
   const openWindow = useWindowStore(state => state.openWindow);
