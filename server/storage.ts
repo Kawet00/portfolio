@@ -2,7 +2,7 @@ import {
   type User, type InsertUser, 
   type Project, type InsertProject,
   type Profile, type InsertProfile
-} from "@shared/schema";
+} from "../shared/schema.js";
 
 // modify the interface with any CRUD methods
 // you might need
