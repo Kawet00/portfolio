@@ -11,9 +11,6 @@
     "check": "tsc",
     "db:push": "drizzle-kit push"
   },
-  "resolutions": {
-  "rollup": "npm:@rollup/wasm-node"
-},
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
     "@neondatabase/serverless": "^0.10.4",
@@ -94,6 +91,7 @@
     "vite": "^5.4.14"
   },
   "optionalDependencies": {
-    "bufferutil": "^4.0.8"
+    "bufferutil": "^4.0.8",
+    "@rollup/rollup-linux-x64-gnu": "4.9.5"
   }
 }
