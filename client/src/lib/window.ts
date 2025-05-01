@@ -16,7 +16,10 @@ export type WindowId =
   | 'trash'
   | 'easter-egg'
   | 'secret-project'
-  | 'settings';
+  | 'settings'
+  | 'snake'
+  | 'tetris'
+  | 'explorer';
 
 export type WindowState = {
   id: WindowId;
@@ -78,6 +81,9 @@ export const useWindowStore = create<WindowsStore>((set, get) => ({
     'contact': createDefaultWindow('contact', 'Contact', 'ri-mail-line'),
     'skills': createDefaultWindow('skills', 'Skills', 'ri-code-s-slash-line'),
     'trash': createDefaultWindow('trash', 'Trash', 'ri-delete-bin-line'),
+    'snake': createDefaultWindow('snake', 'Snake Game', 'ri-gamepad-line'),
+    'tetris': createDefaultWindow('tetris', 'Tetris Game', 'ri-gamepad-line'),
+    'explorer': createDefaultWindow('explorer', 'Explorer', 'ri-folder-line'),
     'easter-egg': createDefaultWindow('easter-egg', '🎉 Easter Egg! 🎉', 'ri-egg-line'),
     'secret-project': createDefaultWindow('secret-project', 'secret_project.txt', 'ri-file-text-line'),
     'settings': createDefaultWindow('settings', 'Settings', 'ri-settings-line'),
