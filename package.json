@@ -12,7 +12,7 @@
     "db:push": "drizzle-kit push"
   },
   "engines": {
-    "node": "22.x"
+    "node": "latest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
