@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/7e99a3ab-172f-4d9d-97ec-6ce6316af79f/resourceGroups/projets_perso/providers/Microsoft.Web/sites/portfoliotest",
+    "appService.deploySubpath": "client"
+}
